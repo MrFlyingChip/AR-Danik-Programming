@@ -76,4 +76,9 @@ public class MainMenuUI : MonoBehaviour
         playButton.GetComponent<Animator>().SetBool("Ready", false);
         hand.GetComponent<Animator>().SetBool("Ready", true);
     }
+
+    public void OnPrintButtonClicked()
+    {
+        LinkToURL(languages[currentLanguage].URL);
+    }
 }

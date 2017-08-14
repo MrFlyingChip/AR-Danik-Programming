@@ -30,9 +30,9 @@ public class ButtonController : MonoBehaviour {
             motherModeController.SetNewQuestTime("120");
             timeInput.GetComponent<InputField>().text = motherModeController.questTime.ToString();       
         }
-        else if (int.Parse(timeString) < 1 || int.Parse(timeString) > 999)
+        else if (int.Parse(timeString) > 999)
         {
-            motherModeController.SetNewQuestTime("120");
+            motherModeController.SetNewQuestTime("999");
             timeInput.GetComponent<InputField>().text = motherModeController.questTime.ToString();
         }
         else
