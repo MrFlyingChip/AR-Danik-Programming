@@ -89,6 +89,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\AnimationController.cs" />
     <Compile Include="Assets\Scripts\ButtonController.cs" />
+    <Compile Include="Assets\Scripts\CellButton.cs" />
     <Compile Include="Assets\Scripts\MainMenuUI.cs" />
     <Compile Include="Assets\Scripts\MotherModeController.cs" />
     <Compile Include="Assets\Scripts\SceneLoader.cs" />

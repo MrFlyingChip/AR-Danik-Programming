@@ -8,7 +8,10 @@ public class MotherModeController : MonoBehaviour {
 
     public int[] cardsArray = new int[18];
     public int questTime = 120;
-    public int[,] questArray = new int[10, 19];
+    public List<string> questArray = new List<string>();
+    public List<string> crystalArray = new List<string>();
+    public List<string> animalArray = new List<string>();
+    public int color = 0;
 
     public void SetNewCard(int number)
     {
@@ -25,9 +28,34 @@ public class MotherModeController : MonoBehaviour {
         StartCoroutine(SceneLoader.LoadSceneAsync(scene));
     }
 
-    public void SetNewQuestArray(int row, int column)
+    public void SetNewQuestArray(string cell)
     {
-        questArray[row, column] = (questArray[row, column] == 0) ? 1 : 0;
+        questArray.Add(cell);
+    }
+
+    public void DeleteCell(string cell)
+    {
+        questArray.Remove(cell);
+    }
+
+    public void SetNewCrystalArray(string cell)
+    {
+        crystalArray.Add(cell);
+    }
+
+    public void DeleteCrystal(string cell)
+    {
+        crystalArray.Remove(cell);
+    }
+
+    public void SetNewAnimalArray(string cell)
+    {
+        animalArray.Add(cell);
+    }
+
+    public void DeleteAnimal(string cell)
+    {
+        animalArray.Remove(cell);
     }
 
     public void Save()

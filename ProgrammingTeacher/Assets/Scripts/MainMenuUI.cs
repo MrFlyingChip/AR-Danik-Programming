@@ -11,12 +11,14 @@ public class Language
     public string URL;
     public string downloadString;
     public string printString;
+    public string privacyPolicy;
 
-    public void ChangeLanguage(int currentLanguage, Image languageImage, Text languageText)
+    public void ChangeLanguage(int currentLanguage, Image languageImage, Text languageText, Text privacyText)
     {
         PlayerPrefs.SetInt("Language", currentLanguage);
         languageImage.sprite = languageSprite;
         languageText.text = "1. " + downloadString + "\n" + "2. " + printString;
+        privacyText.text = privacyPolicy;
     }
 }
 
@@ -26,6 +28,7 @@ public class MainMenuUI : MonoBehaviour
     public Language[] languages;
     public Image languageImage;
     public Text languageText;
+    public Text privacyText;
 
     public GameObject playButton;
     public GameObject hand;
@@ -63,7 +66,7 @@ public class MainMenuUI : MonoBehaviour
         {
             currentLanguage = 0;
         }
-        languages[currentLanguage].ChangeLanguage(currentLanguage, languageImage, languageText);
+        languages[currentLanguage].ChangeLanguage(currentLanguage, languageImage, languageText, privacyText);
     }
 
     public void LoadScene(int scene)
