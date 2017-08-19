@@ -109,7 +109,7 @@ public class ButtonController : MonoBehaviour {
             animalClicked = true;
             currentAnimal = animal;
         }      
-    }
+    }   
 
     public void OnCrystalButtonClicked()
     {
