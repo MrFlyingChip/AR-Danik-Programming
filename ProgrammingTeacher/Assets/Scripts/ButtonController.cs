@@ -59,8 +59,17 @@ public class ButtonController : MonoBehaviour {
     public void OnQuestCardClick(GameObject go)
     {
         int number = int.Parse(go.name) - 1;
-        motherModeController.SetNewCard(number);
-        go.GetComponent<Image>().sprite = questCardSprites[motherModeController.cardsArray[number]];
+        if (number == 0)
+        {
+            motherModeController.SetNewCard(number);
+            go.GetComponent<Image>().sprite = questCardSprites[motherModeController.cardsArray[number]];
+        }
+        else if (motherModeController.cardsArray[number - 1] != 0)
+        {
+            motherModeController.SetNewCard(number);
+            go.GetComponent<Image>().sprite = questCardSprites[motherModeController.cardsArray[number]];
+        }
+        
     }
 
     public void OnColorClick(int color)
@@ -116,4 +125,89 @@ public class ButtonController : MonoBehaviour {
         crystalClicked = !crystalClicked;
     }
 
+    int click = 0;
+    public void OnPlayButtonClicked()
+    {
+        if (click == 0)
+        {
+            Show();
+            
+        }
+        else
+        {
+            motherModeController.Save();
+        }
+    }
+
+    public void Show()
+    {
+        if (motherModeController.animalArray.Count == 2 && motherModeController.color > -1)
+        {
+            CellButton[] cells = FindObjectsOfType<CellButton>();
+            foreach (CellButton c in cells)
+            {
+                c.enabled = false;
+                if (!c.activeCell)
+                {
+                    c.GetComponent<Image>().sprite = null;
+                }
+            }
+            foreach (CellButton c in cells)
+            {
+                if (c.activeCell)
+                {
+                    PaintNearCells(c, cells);
+                }
+            }
+
+            TurnOffActive[] turnActive = FindObjectsOfType<TurnOffActive>();
+            foreach (TurnOffActive c in turnActive)
+            {
+                c.TurnOff();
+            }
+
+            TurnOffEnabled[] turnEnabled = FindObjectsOfType<TurnOffEnabled>();
+            foreach (TurnOffEnabled c in turnEnabled)
+            {
+                c.TurnOff();
+            }
+
+            click++;
+        }
+    }
+
+    private CellButton FindCell(CellButton[] cells, int row, int column)
+    {
+        foreach (CellButton c in cells)
+        {
+            if (c.row == row && c.column == column)
+            {
+                return c;
+            }
+        }
+        return null;
+    }
+
+    private void PaintCell(CellButton cell)
+    {
+        if(cell != null)
+        {
+            if (!cell.activeCell)
+            {
+                cell.GetComponent<Image>().sprite = colorSprites[motherModeController.color];
+            }
+        }
+    }
+
+    private void PaintNearCells(CellButton cell, CellButton[] cells)
+    {
+        PaintCell(FindCell(cells, cell.row, cell.column - 1));
+        PaintCell(FindCell(cells, cell.row + 1, cell.column - 1));
+        PaintCell(FindCell(cells, cell.row + 1, cell.column));
+        PaintCell(FindCell(cells, cell.row + 1, cell.column + 1));
+        PaintCell(FindCell(cells, cell.row, cell.column + 1));
+        PaintCell(FindCell(cells, cell.row - 1, cell.column + 1));
+        PaintCell(FindCell(cells, cell.row - 1, cell.column));
+        PaintCell(FindCell(cells, cell.row - 1, cell.column - 1));
+    }
 }

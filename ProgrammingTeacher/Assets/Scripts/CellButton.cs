@@ -69,6 +69,7 @@ public class CellButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
         onLongPress.Invoke();
     }
 
+    float lastTimeClick;
     public void OnPointerClick(PointerEventData eventData)
     {
         if (buttonController.animalClicked && activeCell && !crystal && !animal)
@@ -94,12 +95,14 @@ public class CellButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
         }
         else if (activeCell && !crystal && !animal)
         {
-            if (eventData.clickCount == 2)
+            float currentTimeClick = eventData.clickTime;
+            if (Mathf.Abs(currentTimeClick - lastTimeClick) < 0.75f)
             {
                 activeCell = false;
                 buttonController.motherModeController.DeleteCell(row + "-" + column);
                 GetComponent<Image>().sprite = buttonController.cellNo;
-            }            
+            }
+            lastTimeClick = currentTimeClick;      
         }
         else if (animal)
         {

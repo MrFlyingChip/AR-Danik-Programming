@@ -11,11 +11,18 @@ public class MotherModeController : MonoBehaviour {
     public List<string> questArray = new List<string>();
     public List<string> crystalArray = new List<string>();
     public List<string> animalArray = new List<string>();
-    public int color = 0;
+    public int color = -1;
 
     public void SetNewCard(int number)
     {
-        cardsArray[number] = (cardsArray[number] == 0) ? 1 : 0; 
+        if (cardsArray[number] < 10)
+        {
+            cardsArray[number]++;
+        }
+        else
+        {
+            cardsArray[number] = 0;
+        }
     }
 
     public bool SetNewQuestTime(string timeInput)
@@ -60,6 +67,6 @@ public class MotherModeController : MonoBehaviour {
 
     public void Save()
     {
-
+        Debug.Log("Save");
     }
 }
