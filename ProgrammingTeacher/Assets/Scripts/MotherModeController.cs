@@ -1,6 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
+
+[Serializable]
+public class Animal
+{
+    string location;
+    int number;
+    int rotation;
+
+    public Animal(string location, int number, int rotation)
+    {
+        this.location = location;
+        this.number = number;
+        this.rotation = rotation;
+    }
+
+    public string 
+}
 
 public class MotherModeController : MonoBehaviour {
 

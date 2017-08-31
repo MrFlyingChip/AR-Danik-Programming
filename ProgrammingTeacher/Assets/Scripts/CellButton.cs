@@ -23,6 +23,7 @@ public class CellButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
 
     private bool crystal = false;
 
+    private int animalNumber;
     private void Start()
     {
         onLongPress.AddListener(new UnityAction(DeleteAnimal));
@@ -65,7 +66,6 @@ public class CellButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
 
     private void OnLongPress()
     {
-        
         onLongPress.Invoke();
     }
 
@@ -78,6 +78,7 @@ public class CellButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
             buttonController.motherModeController.SetNewAnimalArray(row + "-" + column);
             buttonController.animalClicked = false;
             buttonController.animalsSprite[buttonController.currentAnimal].used = true;
+            animalNumber = buttonController.currentAnimal;
             animal = true;
         }
         else if (buttonController.crystalClicked && activeCell && !crystal && !animal)
@@ -106,7 +107,7 @@ public class CellButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
         }
         else if (animal)
         {
-            GetComponent<Image>().sprite = buttonController.animalsSprite[buttonController.currentAnimal].RotatedSprite();
+            GetComponent<Image>().sprite = buttonController.animalsSprite[animalNumber].RotatedSprite();
         }
     }
 }

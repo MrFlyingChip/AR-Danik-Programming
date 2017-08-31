@@ -131,11 +131,11 @@ public class ButtonController : MonoBehaviour {
         if (click == 0)
         {
             Show();
-            
+            motherModeController.Save();
         }
         else
         {
-            motherModeController.Save();
+            StartCoroutine(SceneLoader.LoadSceneAsync(0));
         }
     }
 
