@@ -36,6 +36,8 @@ public class CellButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
             GetComponent<Image>().sprite = buttonController.cellYes;
             buttonController.motherModeController.DeleteAnimal(row + "-" + column);
             buttonController.animalClicked = false;
+            buttonController.animalsSprite[animalNumber].used = false;
+            buttonController.animalsSprite[animalNumber].currentSprite = 0;
             animal = false;
         }
         else if (crystal)
@@ -75,7 +77,7 @@ public class CellButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
         if (buttonController.animalClicked && activeCell && !crystal && !animal)
         {
             GetComponent<Image>().sprite = buttonController.animalsSprite[buttonController.currentAnimal].CurrentSprite();
-            buttonController.motherModeController.SetNewAnimalArray(row + "-" + column);
+            buttonController.motherModeController.SetNewAnimalArray(new Animal(row + "-" + column, buttonController.currentAnimal, 0));
             buttonController.animalClicked = false;
             buttonController.animalsSprite[buttonController.currentAnimal].used = true;
             animalNumber = buttonController.currentAnimal;
@@ -108,6 +110,7 @@ public class CellButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
         else if (animal)
         {
             GetComponent<Image>().sprite = buttonController.animalsSprite[animalNumber].RotatedSprite();
+            buttonController.motherModeController.animalArray.Find(s => s.location == row + "-" + column).rotation = buttonController.animalsSprite[animalNumber].currentSprite;
         }
     }
 }

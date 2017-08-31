@@ -6,9 +6,9 @@ using UnityEngine;
 [Serializable]
 public class Animal
 {
-    string location;
+    public string location;
     int number;
-    int rotation;
+    public int rotation;
 
     public Animal(string location, int number, int rotation)
     {
@@ -17,7 +17,10 @@ public class Animal
         this.rotation = rotation;
     }
 
-    public string 
+    public string SaveString()
+    {
+        return location + "/" + number + "/" + rotation;
+    }
 }
 
 public class MotherModeController : MonoBehaviour {
@@ -28,7 +31,7 @@ public class MotherModeController : MonoBehaviour {
     public int questTime = 120;
     public List<string> questArray = new List<string>();
     public List<string> crystalArray = new List<string>();
-    public List<string> animalArray = new List<string>();
+    public List<Animal> animalArray = new List<Animal>();
     public int color = -1;
 
     public void SetNewCard(int number)
@@ -73,18 +76,43 @@ public class MotherModeController : MonoBehaviour {
         crystalArray.Remove(cell);
     }
 
-    public void SetNewAnimalArray(string cell)
+    public void SetNewAnimalArray(Animal animal)
     {
-        animalArray.Add(cell);
+        animalArray.Add(animal);
     }
 
-    public void DeleteAnimal(string cell)
+    public void DeleteAnimal(string location)
     {
-        animalArray.Remove(cell);
+        Animal a = animalArray.Find(s => s.location == location);
+        animalArray.Remove(a);
     }
 
     public void Save()
     {
-        Debug.Log("Save");
+        string s = WriteArray(cardsArray);
+        if (questArray.Count > 0) s += ";" + WriteList(questArray);
+        if (crystalArray.Count > 0) s += ";" + WriteList(crystalArray);
+        s += ";" + animalArray[0].SaveString() + "+" + animalArray[1].SaveString();
+        PlayerPrefs.SetString("Quest" + questNumber, s);
+    }
+
+    private string WriteArray(int[] array)
+    {
+        string s = array[0].ToString();
+        for (int i = 1; i < array.Length; i++)
+        {
+            s += "+" + array[i];
+        }
+        return s;
+    }
+
+    private string WriteList(List<string> list)
+    {
+        string s = list[0];  
+        for (int i = 1; i < list.Count; i++)
+        {
+            s += "+" + list[i];
+        }
+        return s;
     }
 }

@@ -210,4 +210,12 @@ public class ButtonController : MonoBehaviour {
         PaintCell(FindCell(cells, cell.row - 1, cell.column));
         PaintCell(FindCell(cells, cell.row - 1, cell.column - 1));
     }
+
+    public void OnGenerateCodeButtonClicked()
+    {
+            if (PlayerPrefs.HasKey("Quest1") && PlayerPrefs.HasKey("Quest2") && PlayerPrefs.HasKey("Quest3"))
+            {
+            StartCoroutine(SceneLoader.LoadSceneAsync(5));
+        }
+    }
 }
