@@ -85,6 +85,7 @@ public class ButtonController : MonoBehaviour {
         }
         cellNo = colorSprites[color];
         motherModeController.color = color;
+        TurnOffAnimation();
     }
 
     public void OnQuestTimeChanged()
@@ -117,6 +118,7 @@ public class ButtonController : MonoBehaviour {
         {
             animalClicked = true;
             currentAnimal = animal;
+            TurnOffAnimation();
         }      
     }   
 
@@ -128,10 +130,11 @@ public class ButtonController : MonoBehaviour {
     int click = 0;
     public void OnPlayButtonClicked()
     {
+        TurnOffAnimation();
         if (click == 0)
         {
             Show();
-            motherModeController.Save();
+            
         }
         else
         {
@@ -171,8 +174,25 @@ public class ButtonController : MonoBehaviour {
             {
                 c.TurnOff();
             }
-
+            motherModeController.Save();
             click++;
+        }
+        else if(motherModeController.animalArray.Count != 2)
+        {
+            TurnOnAnimation[] turnEnabled = FindObjectsOfType<TurnOnAnimation>();
+            foreach (TurnOnAnimation c in turnEnabled)
+            {
+                c.TurnOn();
+            }
+        }
+    }
+
+    public void TurnOffAnimation()
+    {
+        TurnOnAnimation[] turnEnabled = FindObjectsOfType<TurnOnAnimation>();
+        foreach (TurnOnAnimation c in turnEnabled)
+        {
+            c.TurnOff();
         }
     }
 
@@ -187,6 +207,8 @@ public class ButtonController : MonoBehaviour {
         }
         return null;
     }
+
+
 
     private void PaintCell(CellButton cell)
     {
