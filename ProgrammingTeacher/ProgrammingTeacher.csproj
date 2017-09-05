@@ -109,7 +109,9 @@
     <Compile Include="Assets\QRcode\Scripts\Utility.cs" />
     <Compile Include="Assets\Scripts\AnimationController.cs" />
     <Compile Include="Assets\Scripts\ButtonController.cs" />
+    <Compile Include="Assets\Scripts\CardButton.cs" />
     <Compile Include="Assets\Scripts\CellButton.cs" />
+    <Compile Include="Assets\Scripts\GameController.cs" />
     <Compile Include="Assets\Scripts\LevelChoose.cs" />
     <Compile Include="Assets\Scripts\MainMenuUI.cs" />
     <Compile Include="Assets\Scripts\MotherModeController.cs" />
@@ -117,6 +119,7 @@
     <Compile Include="Assets\Scripts\TurnOffActive.cs" />
     <Compile Include="Assets\Scripts\TurnOffEnabled.cs" />
     <Compile Include="Assets\Scripts\TurnOnAnimation.cs" />
+    <Compile Include="Assets\Scripts\UIController.cs" />
     <Compile Include="Assets\Vuforia\Scripts\BackgroundPlaneBehaviour.cs" />
     <Compile Include="Assets\Vuforia\Scripts\CloudRecoBehaviour.cs" />
     <Compile Include="Assets\Vuforia\Scripts\CylinderTargetBehaviour.cs" />
