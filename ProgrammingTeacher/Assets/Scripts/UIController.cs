@@ -11,6 +11,7 @@ public class UIController : MonoBehaviour {
     public Sprite[] cardSprites;
     public Sprite nullCardSprite;
     public GameObject[] cards;
+    public GameController gameController;
 
     private int currentCard;
 
@@ -50,7 +51,7 @@ public class UIController : MonoBehaviour {
 
     public void RegisterCard()
     {
-
+        gameController.RegisterCard(currentCard);
     }
 
     public void LoadScene(int scene)

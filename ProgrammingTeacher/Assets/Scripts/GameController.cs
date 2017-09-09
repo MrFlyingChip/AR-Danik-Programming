@@ -11,9 +11,9 @@ public class GameController : MonoBehaviour {
 
     public int[] cardsArraySaved = new int[18];
     public int questTime;
-    public List<string> questArray = new List<string>();
-    public List<string> crystalArray = new List<string>();
-    public List<Animal> animalArray = new List<Animal>();
+    public string[] questArray;
+    public string[] crystalArray;
+    public string[] animalArray = new string[2];
     public int color = -1;
 
     void Start() {
@@ -25,6 +25,7 @@ public class GameController : MonoBehaviour {
         if (PlayerPrefs.HasKey("Quest" + questNumber))
         {
             canRegister = true;
+            LoadLevel();
         }
         else
         {
@@ -41,7 +42,7 @@ public class GameController : MonoBehaviour {
 
     public void DeleteCard()
     {
-        if (cardsArray != null)
+        if (cardsArray.Count > 0)
         {
             cardsArray.Remove(cardsArray[cardsArray.Count - 1]);
             ui.RefreshCards(cardsArray);
@@ -57,4 +58,28 @@ public class GameController : MonoBehaviour {
 	void Update () {
 		
 	}
+    public string[] quest;
+    private void LoadLevel()
+    {
+        quest = PlayerPrefs.GetString("Quest" + questNumber).Split(';');
+        cardsArraySaved = StringArrayToInt(quest[0].Split('+'));
+        questArray = quest[1].Split('+');
+        crystalArray = quest[2].Split('+');
+        string[] animal = quest[3].Split('+');
+        animalArray[0] = animal[0];
+        animalArray[1] = animal[1];
+        color = int.Parse(quest[4]);
+        questTime = int.Parse(quest[5]);
+    }
+
+   private int[] StringArrayToInt(string[] str)
+    {
+        int[] intArray = new int[str.Length];
+        for (int i = 0; i < str.Length; i++)
+        {
+            intArray[i] = int.Parse(str[i]);
+        }
+        return intArray;
+    }
+
 }

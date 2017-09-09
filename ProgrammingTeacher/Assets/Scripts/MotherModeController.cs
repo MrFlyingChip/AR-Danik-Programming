@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 
+
 [Serializable]
 public class Animal
 {
@@ -91,8 +92,12 @@ public class MotherModeController : MonoBehaviour {
     {
         string s = WriteArray(cardsArray);
         if (questArray.Count > 0) s += ";" + WriteList(questArray);
+        else s += ";";
         if (crystalArray.Count > 0) s += ";" + WriteList(crystalArray);
+        else s += ";";
         s += ";" + animalArray[0].SaveString() + "+" + animalArray[1].SaveString();
+        s += ";" + color;
+        s += ";" + questTime;
         PlayerPrefs.SetString("Quest" + questNumber, s);
     }
 
